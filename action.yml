@@ -1,11 +1,13 @@
-name: 'Your name here'
-description: 'Provide a description here'
-author: 'Your name or organization here'
+name: "Notion Sync MD Page"
+description: "Syncs a MD file in your repository with a specified Notion page"
+author: "Elioby"
 inputs:
-  milliseconds: # change this
-    required: true
-    description: 'input description here'
-    default: 'default value if applicable'
+  token:
+    description: "The Notion API token"
+  page:
+    description: "The URL of the Notion page to update"
+  mdFile:
+    description: "The MD file on disk"
 runs:
   using: 'node16'
   main: 'dist/index.js'
