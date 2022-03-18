@@ -51,28 +51,44 @@ const fs = __importStar(__nccwpck_require__(5747));
 const core = __importStar(__nccwpck_require__(2186));
 const client_1 = __nccwpck_require__(324);
 const martian_1 = __nccwpck_require__(2418);
+let notion;
 function run() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             const token = core.getInput('token');
             const page = core.getInput('page');
             const mdFile = core.getInput('mdFile');
-            const notion = new client_1.Client({ auth: token });
+            notion = new client_1.Client({ auth: token });
             const mdFileContents = fs.readFileSync(mdFile, 'utf8');
             const notionUrlMatch = /[^-]*$/.exec(page);
             if (notionUrlMatch == null) {
                 throw new SyntaxError('Provided page was not in a valid format, url must end with "-<page-id>"');
             }
             const notionPageId = notionUrlMatch[0];
+            // delete any existing blocks on the page
+            deleteAllChildren(notionPageId);
             const blocks = (0, martian_1.markdownToBlocks)(mdFileContents, { allowUnsupported: true });
             const notionBlocks = JSON.parse(JSON.stringify(blocks));
-            console.log(JSON.stringify(blocks));
             notion.blocks.children.append({ block_id: notionPageId, children: notionBlocks });
         }
         catch (error) {
             if (error instanceof Error)
                 core.setFailed(error.message);
         }
+    });
+}
+function deleteAllChildren(blockId, startCursor = "0") {
+    return __awaiter(this, void 0, void 0, function* () {
+        const request = notion.blocks.children.list({ block_id: blockId, start_cursor: startCursor, page_size: 100 });
+        let response = yield request;
+        do {
+            for (let block of response.results) {
+                notion.blocks.delete({ block_id: block.id });
+            }
+            if (response.next_cursor) {
+                deleteAllChildren(blockId, response.next_cursor);
+            }
+        } while (response.next_cursor);
     });
 }
 run();
