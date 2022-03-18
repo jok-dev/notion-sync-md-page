@@ -77,7 +77,7 @@ function run() {
         }
     });
 }
-function deleteAllChildren(blockId, startCursor = "0") {
+function deleteAllChildren(blockId, startCursor = undefined) {
     return __awaiter(this, void 0, void 0, function* () {
         const request = notion.blocks.children.list({ block_id: blockId, start_cursor: startCursor, page_size: 100 });
         let response = yield request;
