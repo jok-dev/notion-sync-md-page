@@ -37,7 +37,7 @@ async function run(): Promise<void> {
   }
 }
 
-async function deleteAllChildren(blockId: string, startCursor: string = "0") {
+async function deleteAllChildren(blockId: string, startCursor: string | undefined = undefined) {
   const request = notion.blocks.children.list({ block_id: blockId, start_cursor: startCursor, page_size: 100 })
   let response = await request
   do {
