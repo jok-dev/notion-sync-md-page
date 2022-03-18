@@ -42,7 +42,7 @@ async function deleteAllChildren(blockId: string, startCursor: string | undefine
   let response = await request
   do {
     for (let block of response.results) {
-      notion.blocks.delete({ block_id: block.id })
+      await notion.blocks.delete({ block_id: block.id })
     }
 
     if (response.next_cursor) {
