@@ -66,7 +66,7 @@ function run() {
             }
             const notionPageId = notionUrlMatch[0];
             // delete any existing blocks on the page
-            deleteAllChildren(notionPageId);
+            yield deleteAllChildren(notionPageId);
             const blocks = (0, martian_1.markdownToBlocks)(mdFileContents, { allowUnsupported: true });
             const notionBlocks = JSON.parse(JSON.stringify(blocks));
             notion.blocks.children.append({ block_id: notionPageId, children: notionBlocks });
@@ -86,7 +86,7 @@ function deleteAllChildren(blockId, startCursor = undefined) {
                 yield notion.blocks.delete({ block_id: block.id });
             }
             if (response.next_cursor) {
-                deleteAllChildren(blockId, response.next_cursor);
+                yield deleteAllChildren(blockId, response.next_cursor);
             }
         } while (response.next_cursor);
     });

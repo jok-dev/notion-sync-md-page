@@ -27,7 +27,7 @@ async function run(): Promise<void> {
     const notionPageId = notionUrlMatch![0]
 
     // delete any existing blocks on the page
-    deleteAllChildren(notionPageId)
+    await deleteAllChildren(notionPageId)
 
     const blocks = markdownToBlocks(mdFileContents, { allowUnsupported: true })
     const notionBlocks = <BlockObjectRequest[]> JSON.parse(JSON.stringify(blocks))
@@ -46,7 +46,7 @@ async function deleteAllChildren(blockId: string, startCursor: string | undefine
     }
 
     if (response.next_cursor) {
-      deleteAllChildren(blockId, response.next_cursor);
+      await deleteAllChildren(blockId, response.next_cursor);
     }
   } while (response.next_cursor);
 }
