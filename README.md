@@ -1,6 +1,6 @@
 # Notion Sync MD Page
 
-This is an action to sync a MD file in your repository with a specified Notion page.
+This is an action to sync a MD file in your repository with a specified Notion page. Useful if you want to share repoistory documentation with non-developers.
 
 ### Example workflow
 
@@ -22,8 +22,8 @@ jobs:
 
 ### Inputs
 
-| Input    | Description                          |
-|----------|--------------------------------------|
-| `token`  | The Notion API token                 |
-| `page`   | The URL of the Notion page to update |
-| `mdFile` | The MD file on disk                  |
+| Input    | Description                                                                                                                                   |
+|----------|-----------------------------------------------------------------------------------------------------------------------------------------------|
+| `token`  | The Notion API token, note this has to be a Notion integration token, not a user token. See: https://developers.notion.com/docs/authorization |
+| `page`   | The URL of the Notion page to update                                                                                                          |
+| `mdFile` | The MD file on disk                                                                                                                           |
