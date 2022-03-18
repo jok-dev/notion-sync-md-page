@@ -83,7 +83,7 @@ function deleteAllChildren(blockId, startCursor = undefined) {
         let response = yield request;
         do {
             for (let block of response.results) {
-                notion.blocks.delete({ block_id: block.id });
+                yield notion.blocks.delete({ block_id: block.id });
             }
             if (response.next_cursor) {
                 deleteAllChildren(blockId, response.next_cursor);
