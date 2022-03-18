@@ -6,7 +6,7 @@ async function run(): Promise<void> {
     const page: string = core.getInput('page')
     const mdFile: string = core.getInput('mdFile')
 
-    console.log(page)
+    
   } catch (error) {
     if (error instanceof Error) core.setFailed(error.message)
   }

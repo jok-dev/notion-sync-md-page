@@ -12,13 +12,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@main
-    - name: Run action
-
+    - name: Sync README to Notion
       uses: Elioby/notion-sync-md-page@main
       with:
         token: notionapitoken
         page: https://notion.so/linktoyourpage
-        mdFile: pathtoyourmdfile
+        mdFile: README.md
 ```
 
 ### Inputs
