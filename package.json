@@ -28,7 +28,7 @@
   "author": "Elioby",
   "license": "MIT",
   "dependencies": {
-    "@actions/core": "^1.6.0",
+    "@actions/core": "^1.9.1",
     "@Elioby/martian": "git@github.com:Elioby/martian.git#master",
     "@notionhq/client": "^1.0.3"
   },
