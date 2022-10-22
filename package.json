@@ -28,7 +28,7 @@
   "author": "Elioby",
   "license": "MIT",
   "dependencies": {
-    "@actions/core": "^1.6.0",
+    "@actions/core": "^1.10.0",
     "@tryfabric/martian": "^1.2.4",
     "@notionhq/client": "^1.0.3"
   },
