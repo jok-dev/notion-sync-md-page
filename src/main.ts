@@ -1,7 +1,7 @@
 import * as fs from 'fs';
 import * as core from '@actions/core'
 import { Client } from '@notionhq/client'
-import {markdownToBlocks} from '@Elioby/martian'
+import {markdownToBlocks} from '@tryfabric/martian'
 import { REPL_MODE_SLOPPY } from 'repl';
 
 // seriously, typescript??
@@ -29,7 +29,7 @@ async function run(): Promise<void> {
     // delete any existing blocks on the page
     await deleteAllChildren(notionPageId)
 
-    const blocks = markdownToBlocks(mdFileContents, { allowUnsupported: true })
+    const blocks = markdownToBlocks(mdFileContents)
     const notionBlocks = <BlockObjectRequest[]> JSON.parse(JSON.stringify(blocks))
     notion.blocks.children.append({ block_id: notionPageId, children: notionBlocks })
   } catch (error) {
