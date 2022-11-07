@@ -30,7 +30,7 @@
   "dependencies": {
     "@actions/core": "^1.6.0",
     "@tryfabric/martian": "^1.2.4",
-    "@notionhq/client": "^1.0.3"
+    "@notionhq/client": "^2.2.2"
   },
   "devDependencies": {
     "@types/node": "^16.10.5",
